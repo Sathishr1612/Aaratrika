@@ -3302,11 +3302,6 @@ color:#fafafa;
 font-size:14px;
 }
 
-
-
-
-
-
 /* ===============================
 RESPONSIVE
 =============================== */
@@ -3341,142 +3336,124 @@ font-size:1.8rem;
 }
 
 
-/* ----------------------------------- */
 
+@media(max-width:768px){
 
-@media (max-width:768px){
-
-body{
-overflow-x:hidden !important;
+.navbar-wrapper{
+padding:0 12px !important;
 }
-
-/* container */
-.container{
-padding:0 16px !important;
-}
-
-/* NAVBAR */
 
 .navbar{
-height:auto !important;
-padding:10px 14px !important;
-border-radius:24px !important;
+height:70px !important;
+padding:0 12px !important;
+border-radius:18px;
 }
 
 .logo-container{
-width:56px !important;
-height:56px !important;
+width:52px !important;
+height:52px !important;
+}
+
+.navbar-actions .btn-primary{
+display:none !important;
 }
 
 .navbar-toggle{
 display:flex !important;
 }
 
-.navbar-nav{
-display:none !important;
 }
 
-.navbar-actions{
-gap:8px !important;
-}
 
-.icon-btn{
-width:38px !important;
-height:38px !important;
-}
-
-/* HERO */
+@media(max-width:768px){
 
 .hero-section{
-padding:70px 14px 20px !important;
+padding:100px 12px 30px !important;
 min-height:auto !important;
 }
 
 .hero-slider{
+width:100% !important;
+max-width:100% !important;
 height:70vh !important;
-min-height:420px !important;
-border-radius:24px !important;
+border-radius:20px !important;
+overflow:hidden;
+}
+
+.hero-video{
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
 .hero-overlay{
-padding:30px 18px 70px !important;
-text-align:center !important;
+padding:30px 18px 80px !important;
+text-align:center;
 }
 
 .hero-content{
 max-width:100% !important;
-margin:0 auto !important;
-}
-
-.hero-subtitle{
-font-size:.75rem !important;
-letter-spacing:2px !important;
+margin:0 auto;
 }
 
 .hero-title{
 font-size:1.7rem !important;
-line-height:1.3 !important;
+line-height:1.3;
 }
 
 .hero-description{
-font-size:.92rem !important;
-line-height:1.6 !important;
+font-size:.95rem;
 }
 
-/* buttons stacked */
 .hero-buttons{
 flex-direction:column !important;
-gap:12px !important;
-width:100% !important;
+gap:12px;
 }
 
-.hero-buttons a,
-.hero-buttons button{
-width:100% !important;
-padding:14px 0 !important;
+.hero-buttons a{
+width:100%;
 }
 
-/* slider dots */
-.hero-slider-dots{
-bottom:18px !important;
 }
 
-/* SECTIONS */
+@media(max-width:768px){
 
-.section-padding{
-padding:50px 0 !important;
+.slide-in-left,
+.slide-in-right{
+transform:none !important;
+opacity:1 !important;
 }
 
-.section-header{
-margin-bottom:36px !important;
 }
 
-/* cards */
-.aaratrika-card,
-.safety-card{
-padding:22px !important;
-border-radius:20px !important;
+
+@media(max-width:768px){
+
+.aaratrika-services{
+padding:80px 0 !important;
+min-height:auto;
 }
 
-/* services grid */
-.services-grid{
+.aaratrika-card{
+padding:24px;
+border-radius:18px;
+}
+
+}
+
+@media(max-width:768px){
+
+.about-premium-grid{
 grid-template-columns:1fr !important;
-gap:16px !important;
+gap:30px;
 }
 
-/* project cards */
-.project-card{
-flex-direction:column !important;
+.about-values-grid{
+grid-template-columns:1fr !important;
 }
 
-/* typography */
-
-h1{font-size:1.9rem !important;}
-h2{font-size:1.6rem !important;}
-h3{font-size:1.3rem !important;}
-
-p{
-font-size:.95rem !important;
 }
 
+*{
+max-width:100%;
 }
