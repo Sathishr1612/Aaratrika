@@ -446,3 +446,39 @@ function initStaggerAnimation() {
 
 // Initialize stagger animation
 document.addEventListener('DOMContentLoaded', initStaggerAnimation);
+
+
+
+const counters = document.querySelectorAll(".aarx-num");
+
+const startCounter = (counter)=>{
+let target = +counter.getAttribute("data-target");
+let count = 0;
+
+const update = ()=>{
+let increment = target / 80;
+
+count += increment;
+
+if(count < target){
+counter.innerText = Math.floor(count);
+requestAnimationFrame(update);
+}else{
+counter.innerText = target;
+}
+};
+
+update();
+};
+
+/* run when visible */
+const observer = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+startCounter(entry.target);
+observer.unobserve(entry.target);
+}
+});
+},{threshold:.6});
+
+counters.forEach(c=>observer.observe(c));
