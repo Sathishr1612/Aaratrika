@@ -3719,7 +3719,7 @@ ABOUT PREMIUM SECTION
 .about-bg {
     position: relative;
     overflow: hidden;
-    padding: 80px 0;
+    padding: 90px 0;
 
 
     background-color: #0a0a0b;
@@ -4353,15 +4353,12 @@ SAFETY PAGE- STATUS SECTION
 
 }
 
-
-
-
 /* ===============================
    TRUST SECTION
 ================================= */
 
 #trust {
-    padding: 80px 0;
+    padding: 90px 0;
       background: linear-gradient(
     180deg,
     #050505 0%,
