@@ -493,7 +493,7 @@ if (track) {
     track.innerHTML += track.innerHTML;
 
     let position = 0;
-    const speed = 2.5; // smooth premium speed
+    const speed = 2; // smooth premium speed
     let paused = false;
 
     track.addEventListener("mouseenter", () => paused = true);
