@@ -1134,7 +1134,7 @@ img {
 
     .vm-panel {
         padding: 30px;
-        margin-top:30px;
+        margin-top: 30px;
         min-height: auto;
     }
 
@@ -1367,10 +1367,11 @@ img {
     padding: 120px 0;
     color: #fff;
     background:
-        radial-gradient(circle at 50% 30%, rgba(212,175,55,0.06), transparent 45%),
-        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.02), transparent 60%),
+        radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.06), transparent 45%),
+        radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.02), transparent 60%),
         linear-gradient(140deg, #050A10 0%, #0A121B 45%, #070D14 75%, #050A10 100%);
 }
+
 /* LEFT STICKY TEXT */
 .services-adv-left {
     position: sticky;
@@ -1392,7 +1393,7 @@ img {
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 20px;
-    color:var(--gold-);
+    color: var(--gold-);
 }
 
 .services-adv-desc {
@@ -3061,7 +3062,7 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--bg-main);
+    background: #0b0b0b;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3077,8 +3078,8 @@ img {
 .loading-spinner {
     width: 50px;
     height: 50px;
-    border: 3px solid var(--bg-accent);
-    border-top-color: var(--primary-orange);
+     border: 4px solid rgba(255, 255, 255, 0.08); /* soft ring */
+    border-top: 4px solid #d4af37; /* premium gold */
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -3164,52 +3165,107 @@ img {
     }
 }
 
-/* ==============================
-   MOBILE
-============================== */
+/* ==========================================
+   ULTRA COMPACT PREMIUM MOBILE – STATS
+   (Mobile Only – Desktop Safe)
+========================================== */
 
 @media (max-width: 768px) {
 
+    /* Reduce section height */
     .stats-section {
-        padding: 70px 0;
+        padding: 40px 15px;   /* Reduced top & bottom */
+        text-align: center;
     }
 
+    /* Vertical stacking with tight spacing */
+    .stats-section .row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;   /* Reduced gap */
+    }
+
+    /* Full width columns */
+    .stats-section .col-lg-3,
+    .stats-section .col-md-6,
+    .stats-section .col-sm-6 {
+        width: 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+
+    /* Compact stat box */
+    .stat-box {
+        padding: 12px 5px;   /* Very tight */
+        width: 100%;
+    }
+
+    /* Remove divider extra spacing */
+    .stat-box::after {
+        display: none;
+    }
+
+    /* Number alignment */
+    .stat-number {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 4px;  /* Tight spacing */
+    }
+
+    /* Main number */
     .counter {
-        font-size: 2rem;
+        font-size: 2.4rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1;
+        letter-spacing: 0.5px;
     }
 
+    /* Plus symbol */
     .symbol {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: #d4af37;
+        margin-left: 3px;
+        margin-top: 0;
     }
 
+    /* Description text */
     .stat-box p {
         font-size: 0.95rem;
-    }
-
-    .stat-box {
-        padding: 25px 10px;
+        margin-top: 2px;   /* Very tight */
+        line-height: 1.3;
+        color: rgba(255,255,255,0.95);
     }
 }
 
-/* ==============================
-   SMALL MOBILE
-============================== */
+
+/* ==========================================
+   EXTRA SMALL MOBILE
+========================================== */
 
 @media (max-width: 480px) {
 
+    .stats-section {
+        padding: 35px 12px;
+    }
+
     .counter {
-        font-size: 1.8rem;
+        font-size: 2.1rem;
     }
 
     .symbol {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
 
     .stat-box p {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
     }
-}
 
+}
 
 /* ==============================
    PREMIUM CTA SECTION (FINAL)
@@ -3346,6 +3402,7 @@ img {
         width: 100%;
     }
 }
+
 @media (max-width: 768px) {
 
     .cta-section {
@@ -3369,9 +3426,12 @@ img {
 
     .cta-btn {
         width: 100%;
-        padding: 14px 20px;   /* reduced height */
-        font-size: 0.95rem;   /* slightly smaller text */
-        border-radius: 40px;  /* softer look */
+        padding: 14px 20px;
+        /* reduced height */
+        font-size: 0.95rem;
+        /* slightly smaller text */
+        border-radius: 40px;
+        /* softer look */
     }
 
     .col-lg-4 {
@@ -3659,7 +3719,7 @@ ABOUT PREMIUM SECTION
 .about-bg {
     position: relative;
     overflow: hidden;
-    padding: 100px 0;
+    padding: 80px 0;
 
 
     background-color: #0a0a0b;
@@ -4291,4 +4351,132 @@ SAFETY PAGE- STATUS SECTION
         margin-top: 6px;
     }
 
+}
+
+
+
+
+/* ===============================
+   TRUST SECTION
+================================= */
+
+#trust {
+    padding: 80px 0;
+      background: linear-gradient(
+    180deg,
+    #050505 0%,
+    #0b0f14 50%,
+    #050505 100%
+  );
+    overflow: hidden;
+}
+
+.trust-header {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.trust-header h2 {
+    color:var(--gold-);
+    font-size: 2.4rem;
+    font-weight: 600;
+}
+
+/* ===============================
+   MARQUEE CONTAINER
+================================= */
+
+.logo-marquee {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Edge fade effect */
+
+.logo-marquee::before,
+.logo-marquee::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 140px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.logo-marquee::before {
+    left: 0;
+    background: linear-gradient(to right, #000, transparent);
+}
+
+.logo-marquee::after {
+    right: 0;
+    background: linear-gradient(to left, #000, transparent);
+}
+
+/* ===============================
+   TRACK
+================================= */
+
+.logo-track {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    width: max-content;
+    will-change: transform;
+}
+
+/* ===============================
+   LOGO CARD STYLE
+================================= */
+
+.logo-track img {
+
+    height: 95px;
+    width: 170px;
+    object-fit: contain;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.04);
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+
+    opacity: 0.9;
+    transition: 0.35s ease;
+}
+
+/* Hover effect */
+
+.logo-track img:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.18);
+    opacity: 1;
+}
+
+/* ===============================
+   MOBILE
+================================= */
+
+@media (max-width: 768px) {
+
+    #trust {
+        padding: 70px 0;
+    }
+
+    .trust-header h2 {
+        font-size: 1.4rem;
+    }
+
+    .logo-track {
+        gap: 25px;
+    }
+
+    .logo-track img {
+        height: 90px;
+        width: 130px;
+        padding: 12px 15px;
+    }
 }
