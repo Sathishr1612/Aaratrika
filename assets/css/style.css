@@ -755,95 +755,101 @@ img {
 }
 
 
-
 /* =========================
-   vission & mission
+   VISION & MISSION
 ========================= */
 
 .vm-corporate {
     position: relative;
-    padding: 90px 0;
+    padding: 100px 0;
 
     background: linear-gradient(135deg,
-            #000000 0%,
-            #111111 35%,
-            #1a1a1a 65%,
-            #000000 100%);
+        #000000 0%,
+        #111111 40%,
+        #1a1a1a 70%,
+        #000000 100%);
     overflow: hidden;
 }
 
-
+/* subtle gold glow */
 .vm-corporate::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.07), transparent 60%);
+    background: radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.06), transparent 60%);
     pointer-events: none;
 }
 
+/* ================= HEADER ================= */
 
 .section-label {
-    font-size: .95rem;
+    font-size: 0.9rem;
     letter-spacing: 2px;
-    color: #ffffff;
+    color: #D4AF37;
     display: inline-block;
     margin-bottom: 10px;
 }
 
 .section-title {
-    font-size: 2.2rem;
-    color: var(--gold-);
+    font-size: 2.4rem;
+    color: #ffffff;
     font-weight: 600;
 }
 
+/* ================= GRID ================= */
+
 .vm-corporate .row {
-    align-items: stretch;
+    align-items: center;
 }
 
+/* ================= TEXT PANEL ================= */
 
 .vm-panel {
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(212, 175, 55, 0.25);
-    border-radius: 18px;
-    padding: 45px;
+    position: relative;
+
+    background: transparent; /* removed box */
+    border: none;
+    border-radius: 0;
+
+    padding: 30px 20px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    min-height: 420px;
-    transition: .35s ease;
+    min-height: auto;
 }
 
-
-.vm-panel:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 25px 60px rgba(212, 175, 55, .15);
-}
-
-
-.vm-panel h3 {
-    font-size: 1.5rem;
-    color: #fff;
+/* gold divider line */
+.vm-panel::before {
+    content: "";
+    width: 50px;
+    height: 2px;
+    background: #D4AF37;
+    display: block;
     margin-bottom: 18px;
 }
 
-.vm-panel h3::after {
-    content: "";
-    width: 40px;
-    height: 3px;
-    background: #D4AF37;
-    display: block;
-    margin-top: 10px;
+/* ================= HEADINGS ================= */
+
+.vm-panel h3 {
+    font-size: 1.6rem;
+    margin-bottom: 18px;
+
+    background: linear-gradient(90deg, #FFF3B0, #FFD700, #D4AF37);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
+/* ================= TEXT ================= */
 
 .vm-panel p {
-    color: #bdbdbd;
+    color: #cfcfcf;
     line-height: 1.8;
+    margin-bottom: 14px;
 }
 
+/* ================= LIST ================= */
 
 .vm-list {
     list-style: none;
@@ -855,7 +861,7 @@ img {
     position: relative;
     padding-left: 22px;
     margin-bottom: 14px;
-    color: #bdbdbd;
+    color: #cfcfcf;
     line-height: 1.7;
 }
 
@@ -863,51 +869,52 @@ img {
     content: "";
     width: 8px;
     height: 8px;
-    background: #D4AF37;
+    background: #FFD700;
     border-radius: 50%;
     position: absolute;
     left: 0;
     top: 8px;
 }
 
+/* ================= IMAGE ================= */
 
 .vm-image-wrap {
     height: 100%;
     min-height: 420px;
-    display: flex;
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(212, 175, 55, .25);
-    border-radius: 18px;
+
+    background: transparent;
+    border: none;
+    border-radius: 0;
 
     overflow: hidden;
-    transition: .35s ease;
-}
-
-.vm-image-wrap:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 25px 60px rgba(212, 175, 55, .15);
 }
 
 .vm-image-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
+
+    filter: brightness(0.85);
+    transition: transform 1s ease;
 }
 
+/* subtle zoom effect */
+.vm-image-wrap:hover img {
+    transform: scale(1.04);
+}
+
+/* ================= RESPONSIVE ================= */
 
 @media(max-width:991px) {
 
     .vm-panel {
-        padding: 30px;
-        margin-top: 30px;
-        min-height: auto;
+        padding: 20px 10px;
+        margin-top: 20px;
     }
 
     .vm-image-wrap {
-        min-height: 280px;
-        margin: 8px 0px 8px 0px;
+        min-height: 240px;
+        margin: 10px 0;
     }
 
     .section-title {
