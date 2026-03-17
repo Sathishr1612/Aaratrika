@@ -3373,9 +3373,6 @@ img {
         z-index: 999;
     }
 
-    .about-section {
-        margin-top: 40px;
-    }
 
     /* =========================
    MOBILE MENU — PREMIUM GLASS
@@ -3582,7 +3579,7 @@ img {
 @media (max-width:768px) {
 
     .aaratrika-services {
-        padding: 90px 0;
+        padding: 20px 0;
     }
 
     .services-grid {
@@ -3614,7 +3611,7 @@ img {
 }
 
 .about-section {
-    padding: 60px 0;
+    padding:60px 0;
     background:
         radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.05), transparent 45%),
         linear-gradient(180deg, var(--bg-dark), var(--bg-soft), var(--bg-dark));
