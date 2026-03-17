@@ -4200,7 +4200,7 @@ SAFETY PAGE- STATUS SECTION
 ================================= */
 
 #trust {
-    padding: 80px 0;
+    padding: 80px 0 70px;
     background: linear-gradient(180deg, #050505, #0b0b0b, #050505);
 }
 
