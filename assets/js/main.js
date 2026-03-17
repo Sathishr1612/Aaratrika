@@ -3,12 +3,32 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize all components
     initNavbar();
     initHeroSlider();
+    initHeroVideo();
     initScrollAnimations();
     initMobileMenu();
     initSmoothScroll();
     initCounters();
     hideLoading();
 });
+
+/**
+ * Try to start the hero background video reliably.
+ * Some browsers block autoplay without a play() call.
+ */
+function initHeroVideo() {
+    const video = document.querySelector('.hero-video');
+
+    if (!video) return;
+
+    video.muted = true;
+    video.playsInline = true;
+
+    video.play().catch((error) => {
+        console.log('Autoplay blocked:', error);
+    });
+}
+
+
 
 /**
  * Hide Loading Screen
@@ -43,12 +63,8 @@ function initNavbar() {
             navbar.classList.remove('scrolled');
         }
 
-        // Hide/show navbar on scroll
-        if (currentScroll > lastScroll && currentScroll > 200) {
-            navbarWrapper.style.transform = 'translateY(-130%)';
-        } else {
-            navbarWrapper.style.transform = 'translateY(0)';
-        }
+        // Keep navbar visible at all times (sticky behavior)
+        navbarWrapper.style.transform = 'translateY(0)';
 
         lastScroll = currentScroll;
     });
