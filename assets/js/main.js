@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize all components
     initNavbar();
@@ -8,6 +7,11 @@ document.addEventListener('DOMContentLoaded', function () {
     initMobileMenu();
     initSmoothScroll();
     initCounters();
+    initParallax();
+    initLazyLoading();
+    initBackToTop();
+    initActiveNavLink();
+    initStaggerAnimation();
     hideLoading();
 });
 
@@ -27,8 +31,6 @@ function initHeroVideo() {
         console.log('Autoplay blocked:', error);
     });
 }
-
-
 
 /**
  * Hide Loading Screen
@@ -64,7 +66,9 @@ function initNavbar() {
         }
 
         // Keep navbar visible at all times (sticky behavior)
-        navbarWrapper.style.transform = 'translateY(0)';
+        if (navbarWrapper) {
+            navbarWrapper.style.transform = 'translateY(0)';
+        }
 
         lastScroll = currentScroll;
     });
@@ -203,10 +207,10 @@ function initSmoothScroll() {
 }
 
 /**
- * Counter Animation
+ * Counter Animation - Merged both .counter and .aarx-num
  */
 function initCounters() {
-    const counters = document.querySelectorAll('.counter');
+    const counters = document.querySelectorAll('.counter, .aarx-num');
 
     if (counters.length === 0) return;
 
@@ -221,6 +225,12 @@ function initCounters() {
             if (entry.isIntersecting) {
                 const counter = entry.target;
                 const target = parseInt(counter.getAttribute('data-target'));
+                
+                if (isNaN(target)) {
+                    observer.unobserve(counter);
+                    return;
+                }
+
                 const duration = 2000; // 2 seconds
                 const step = target / (duration / 16); // 60fps
                 let current = 0;
@@ -366,9 +376,6 @@ function initLazyLoading() {
     lazyImages.forEach(img => imageObserver.observe(img));
 }
 
-// Initialize lazy loading
-document.addEventListener('DOMContentLoaded', initLazyLoading);
-
 /**
  * Back to Top Button
  */
@@ -393,9 +400,6 @@ function initBackToTop() {
     });
 }
 
-// Initialize back to top
-document.addEventListener('DOMContentLoaded', initBackToTop);
-
 /**
  * Active Navigation Link
  */
@@ -412,7 +416,7 @@ function initActiveNavLink() {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
 
-            if (pageYOffset >= sectionTop - 200) {
+            if (window.pageYOffset >= sectionTop - 200) {
                 current = section.getAttribute('id');
             }
         });
@@ -425,9 +429,6 @@ function initActiveNavLink() {
         });
     });
 }
-
-// Initialize active nav link
-document.addEventListener('DOMContentLoaded', initActiveNavLink);
 
 /**
  * Stagger Animation for Lists
@@ -460,50 +461,13 @@ function initStaggerAnimation() {
     staggerContainers.forEach(container => observer.observe(container));
 }
 
-// Initialize stagger animation
-document.addEventListener('DOMContentLoaded', initStaggerAnimation);
+/**
+ * Logo Track Animation
+ */
+function initLogoTrack() {
+    const track = document.getElementById("logoTrack");
 
-
-
-const counters = document.querySelectorAll(".aarx-num");
-
-const startCounter = (counter) => {
-    let target = +counter.getAttribute("data-target");
-    let count = 0;
-
-    const update = () => {
-        let increment = target / 80;
-
-        count += increment;
-
-        if (count < target) {
-            counter.innerText = Math.floor(count);
-            requestAnimationFrame(update);
-        } else {
-            counter.innerText = target;
-        }
-    };
-
-    update();
-};
-
-/* run when visible */
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            startCounter(entry.target);
-            observer.unobserve(entry.target);
-        }
-    });
-}, { threshold: .6 });
-
-counters.forEach(c => observer.observe(c));
-
-
-
-const track = document.getElementById("logoTrack");
-
-if (track) {
+    if (!track) return;
 
     // Duplicate once for seamless infinite loop
     track.innerHTML += track.innerHTML;
@@ -516,7 +480,6 @@ if (track) {
     track.addEventListener("mouseleave", () => paused = false);
 
     function animate() {
-
         if (!paused) {
             position -= speed;
 
@@ -532,3 +495,23 @@ if (track) {
 
     animate();
 }
+
+// Initialize logo track
+document.addEventListener('DOMContentLoaded', initLogoTrack);
+
+
+// About Page Vision Mission Animation
+(function() {
+    const abtVmObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('on');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    });
+
+    document.querySelectorAll('.abt-vm-anim').forEach(el => abtVmObs.observe(el));
+})();
