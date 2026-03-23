@@ -515,3 +515,43 @@ document.addEventListener('DOMContentLoaded', initLogoTrack);
 
     document.querySelectorAll('.abt-vm-anim').forEach(el => abtVmObs.observe(el));
 })();
+
+
+
+ // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply animation to term items
+        document.querySelectorAll('.term-item').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = `all 0.6s ease ${index * 0.1}s`;
+            observer.observe(item);
+        });
+
+        // Parallax effect for particles
+        document.addEventListener('mousemove', (e) => {
+            const particles = document.querySelectorAll('.particle');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            particles.forEach((particle, index) => {
+                const speed = (index + 1) * 0.5;
+                const xOffset = (window.innerWidth / 2 - e.clientX) * speed * 0.01;
+                const yOffset = (window.innerHeight / 2 - e.clientY) * speed * 0.01;
+                
+                particle.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+            });
+        });
