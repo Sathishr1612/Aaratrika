@@ -2153,7 +2153,7 @@ img {
 
 .am-team-section {
     position: relative;
-    padding: 0 0 90px;
+    padding: 50px 0 90px;
 
     background:
         radial-gradient(circle at 15% 10%, rgba(212, 175, 55, 0.05), transparent 45%),
@@ -4275,8 +4275,7 @@ img {
 
 .aaratrika-desc {
     max-width: 900px;
-    margin: 0 auto 50px;
-
+    margin: 0 auto;
     color: #c7c8cb;
     font-size: 1.15rem;
     line-height: 1.7;
