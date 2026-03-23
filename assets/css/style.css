@@ -4444,7 +4444,7 @@ img {
 }
 
 .about-highlight {
-    color: var(--gold);
+    color: var(--aar-gold);
     font-size: 26px;
     margin-bottom: 20px;
 }
@@ -4454,7 +4454,7 @@ img {
             #FFF3B0,
             #FFD700,
             #E6BE8A,
-            #D4AF37,
+            #FFD700,
             #FFF3B0);
     background-size: 200% auto;
 
@@ -4508,7 +4508,7 @@ img {
     font-weight: 600;
     letter-spacing: 0.2px;
 
-    color: #D4AF37;
+    color: #FFD700;
 
 
     text-shadow: 0 0 6px rgba(212, 175, 55, 0.15);
