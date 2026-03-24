@@ -394,7 +394,7 @@ img {
             #FFD700,
             #D4AF37);
 
-    color: var(--white);
+    color: var(--bg-dark);
     font-weight: 600;
     font-size: 0.85rem;
     border-radius: var(--radius-full);
