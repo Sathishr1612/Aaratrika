@@ -555,3 +555,199 @@ document.addEventListener('DOMContentLoaded', initLogoTrack);
                 particle.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
             });
         });
+
+
+
+         // Banner Carousel Configuration
+    const bannerConfig = {
+        autoPlay: true,
+        interval: 6000, // 6 seconds per slide (slightly longer for better UX)
+        transitionDuration: 1200 // Matches CSS transition
+    };
+
+    // DOM Elements
+    const banner = document.getElementById('projectsBanner');
+    const track = document.getElementById('bannerTrack');
+    const slides = document.querySelectorAll('.projects-banner-slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsContainer = document.getElementById('bannerDots');
+
+    let currentSlide = 0;
+    let totalSlides = slides.length;
+    let autoPlayInterval;
+    let isTransitioning = false;
+
+    // Initialize Dots
+    function initDots() {
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('projects-banner-dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    // Update Dots
+    function updateDots() {
+        const dots = document.querySelectorAll('.projects-banner-dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+
+    // Go to Specific Slide with smooth transition
+    function goToSlide(index) {
+        if (isTransitioning || index === currentSlide) return;
+        isTransitioning = true;
+
+        currentSlide = index;
+        const translateX = -(currentSlide * 100);
+        track.style.transform = `translateX(${translateX}%)`;
+        
+        updateDots();
+        animateContent();
+
+        setTimeout(() => {
+            isTransitioning = false;
+        }, bannerConfig.transitionDuration);
+    }
+
+    // Next Slide
+    function nextSlide() {
+        const next = (currentSlide + 1) % totalSlides;
+        goToSlide(next);
+    }
+
+    // Previous Slide
+    function prevSlide() {
+        const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+        goToSlide(prev);
+    }
+
+    // Animate Content on Slide Change
+    function animateContent() {
+        const currentContent = slides[currentSlide].querySelector('.projects-banner-content');
+        const title = currentContent.querySelector('.projects-banner-title');
+        const text = currentContent.querySelector('.projects-banner-text');
+
+        // Reset animations
+        title.style.animation = 'none';
+        text.style.animation = 'none';
+        
+        // Reset pseudo-element animation via class toggle
+        title.classList.remove('animate');
+        void title.offsetWidth; // Trigger reflow
+        title.classList.add('animate');
+
+        // Restart animations with slight delay for smoothness
+        requestAnimationFrame(() => {
+            title.style.animation = 'fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards';
+            text.style.animation = 'fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards';
+        });
+    }
+
+    // Auto Play
+    function startAutoPlay() {
+        if (!bannerConfig.autoPlay) return;
+        
+        autoPlayInterval = setInterval(() => {
+            nextSlide();
+        }, bannerConfig.interval);
+    }
+
+    function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+    }
+
+    // Event Listeners
+    prevBtn.addEventListener('click', () => {
+        stopAutoPlay();
+        prevSlide();
+        startAutoPlay();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        stopAutoPlay();
+        nextSlide();
+        startAutoPlay();
+    });
+
+    // Pause on hover
+    banner.addEventListener('mouseenter', stopAutoPlay);
+    banner.addEventListener('mouseleave', startAutoPlay);
+
+    // Touch/Swipe Support with smooth handling
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isDragging = false;
+
+    banner.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        isDragging = true;
+        stopAutoPlay();
+    }, { passive: true });
+
+    banner.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        touchEndX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    banner.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        handleSwipe();
+        startAutoPlay();
+    }, { passive: true });
+
+    function handleSwipe() {
+        const swipeThreshold = 60; // Slightly higher threshold for accuracy
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        }
+    }
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            stopAutoPlay();
+            prevSlide();
+            startAutoPlay();
+        } else if (e.key === 'ArrowRight') {
+            stopAutoPlay();
+            nextSlide();
+            startAutoPlay();
+        }
+    });
+
+    // Initialize
+    initDots();
+    startAutoPlay();
+
+    // Preload images for smooth transitions
+    window.addEventListener('load', () => {
+        slides.forEach(slide => {
+            const bg = slide.style.backgroundImage;
+            if (bg) {
+                const url = bg.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+                const img = new Image();
+                img.src = url;
+            }
+        });
+    });
+
+    // Visibility API - pause when tab is hidden
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            stopAutoPlay();
+        } else {
+            startAutoPlay();
+        }
+    });
