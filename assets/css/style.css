@@ -5754,90 +5754,186 @@ SAFETY PAGE- STATUS SECTION
         }
     }
 
-    /* Responsive Design */
-    @media (max-width: 1024px) {
-        .projects-banner-wrapper {
-            height: 60vh;
-            min-height: 450px;
-        }
+/* ================= FINAL PERFECT RESPONSIVE (TEXT WIDTH FIXED) ================= */
 
-        .projects-banner-nav {
-            width: 50px;
-            height: 50px;
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .projects-banner-nav-prev {
-            left: 20px;
-        }
-
-        .projects-banner-nav-next {
-            right: 20px;
-        }
+/* TABLETS */
+@media (max-width: 1024px) {
+    .projects-banner-wrapper {
+        height: 60vh;
+        min-height: 420px;
     }
 
-    @media (max-width: 768px) {
-        .projects-banner-wrapper {
-            height: 50vh; /* Shorter on mobile for better UX */
-            min-height: 400px;
-        }
-
-        .projects-banner-nav {
-            width: 44px;
-            height: 44px;
-            font-size: 1rem;
-        }
-
-        .projects-banner-nav-prev {
-            left: 15px;
-        }
-
-        .projects-banner-nav-next {
-            right: 15px;
-        }
-
-        .projects-banner-content {
-            padding: 1.5rem;
-        }
-
-        .projects-banner-dots {
-            bottom: 25px;
-            gap: 12px;
-        }
-
-        .projects-banner-dot {
-            width: 12px;
-            height: 12px;
-        }
+    .projects-banner-nav {
+        width: 46px;
+        height: 46px;
     }
 
-    @media (max-width: 480px) {
-        .projects-banner-wrapper {
-            height: 45vh;
-            min-height: 350px;
-        }
-
-        .projects-banner-title {
-            letter-spacing: 0.1em;
-        }
+    .projects-banner-nav-prev {
+        left: 12px;
     }
 
-    /* Reduced motion for accessibility */
-    @media (prefers-reduced-motion: reduce) {
-        .projects-banner-track {
-            transition: transform 0.5s ease;
-        }
-        
-        .projects-banner-title,
-        .projects-banner-text,
-        .projects-banner-title::after {
-            animation: none;
-            opacity: 1;
-            transform: none;
-        }
-        
-        .projects-banner-title::after {
-            transform: scaleX(1);
-        }
+    .projects-banner-nav-next {
+        right: 12px;
     }
+}
+
+
+/* SMALL TABLETS */
+@media (max-width: 768px) {
+    .projects-banner-wrapper {
+        height: 55vh;
+        min-height: 380px;
+    }
+
+    .projects-banner-content {
+        width: 85%; /* REDUCED WIDTH */
+        max-width: 500px;
+        padding: 1rem;
+        top: 50%;
+    }
+
+    .projects-banner-title {
+        font-size: 1.5rem;
+        letter-spacing: 0.05em;
+        line-height: 1.3;
+        margin-bottom: 0.7rem;
+    }
+
+    .projects-banner-text {
+        font-size: 0.88rem;
+        line-height: 1.5;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    .projects-banner-nav {
+        width: 38px;
+        height: 38px;
+    }
+
+    .projects-banner-nav-prev {
+        left: 8px;
+    }
+
+    .projects-banner-nav-next {
+        right: 8px;
+    }
+
+    .projects-banner-dots {
+        bottom: 16px;
+        gap: 8px;
+    }
+
+    .projects-banner-dot {
+        width: 9px;
+        height: 9px;
+    }
+}
+
+
+/* MOBILE */
+@media (max-width: 480px) {
+    .projects-banner-wrapper {
+        height: 50vh;
+        min-height: 420px;
+    }
+
+    .projects-banner-content {
+        width: 82%; /* FIXED TEXT WIDTH */
+        max-width: 320px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 0.8rem;
+        text-align: center;
+    }
+
+    .projects-banner-title {
+        font-size: 1.2rem;
+        letter-spacing: 0.04em;
+        line-height: 1.3;
+        margin-bottom: 0.5rem;
+    }
+
+    .projects-banner-text {
+        font-size: 0.78rem;
+        line-height: 1.4;
+        max-width: 260px;
+        margin: 0 auto;
+    }
+
+    /* BUTTON */
+    .projects-banner-content .btn,
+    .projects-banner-content button {
+        margin-top: 10px;
+        padding: 8px 16px;
+        font-size: 0.75rem;
+        border-radius: 20px;
+    }
+
+    /* ARROWS */
+    .projects-banner-nav {
+        width: 30px;
+        height: 30px;
+    }
+
+    .projects-banner-nav-prev {
+        left: 5px;
+    }
+
+    .projects-banner-nav-next {
+        right: 5px;
+    }
+
+    /* DOTS */
+    .projects-banner-dots {
+        bottom: 10px;
+        gap: 6px;
+    }
+
+    .projects-banner-dot {
+        width: 7px;
+        height: 7px;
+    }
+}
+
+
+/* EXTRA SMALL */
+@media (max-width: 360px) {
+    .projects-banner-wrapper {
+        height: 65vh;
+    }
+
+    .projects-banner-content {
+        width: 85%;
+        max-width: 280px;
+    }
+
+    .projects-banner-title {
+        font-size: 1rem;
+    }
+
+    .projects-banner-text {
+        font-size: 0.7rem;
+    }
+}
+
+
+/* REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+    .projects-banner-track {
+        transition: transform 0.5s ease;
+    }
+
+    .projects-banner-title,
+    .projects-banner-text,
+    .projects-banner-title::after {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .projects-banner-title::after {
+        transform: scaleX(1);
+    }
+}
