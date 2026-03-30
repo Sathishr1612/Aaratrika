@@ -2465,7 +2465,7 @@ img {
 
     @media (max-width: 768px) {
         .am-team-section {
-            padding: 60px 0 80px;
+            padding:0px 0 70px;
         }
         
         .am-title {
