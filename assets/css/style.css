@@ -6030,20 +6030,18 @@ SAFETY PAGE- STATUS SECTION
     color: #ffffff !important;
 }
 
-/* White placeholder text (slightly transparent so it looks like a placeholder) */
 .am-contact-form input::placeholder,
 .am-contact-form textarea::placeholder {
     color: rgba(255, 255, 255, 0.6) !important;
 }
 
-/* Fix select option text (options need dark color to be readable in dropdown) */
 .am-contact-form select option {
     color: #000000;
     background-color: #ffffff;
 }
 
 
-/* Makes two-column rows still display side by side */
+
 .am-form-row {
     display: flex;
     gap: 16px;
@@ -6055,7 +6053,7 @@ SAFETY PAGE- STATUS SECTION
     flex-direction: column;
 }
 
-/* Stack on mobile */
+
 @media (max-width: 576px) {
     .am-form-row {
         flex-direction: column;
