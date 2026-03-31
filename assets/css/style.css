@@ -1401,7 +1401,7 @@ img {
     content: "0" counter(service-item);
     position: absolute;
     left: 0;
-    top: 2px;
+    top: 8px;
 
     font-size: 0.8rem;
     font-weight: 600;
