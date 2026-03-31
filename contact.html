@@ -199,31 +199,54 @@
 
                     <h3>Send Us a Message</h3>
 
-                    <form>
+                    <form id="contactForm">
 
                         <div class="am-form-row">
-                            <input type="text" placeholder="Your Name *" required>
-                            <input type="email" placeholder="Email Address *" required>
+                            <!-- Each input wrapped in its own div so error shows directly below it -->
+                            <div class="am-field-group">
+                                <input name="name" class="form-control" id="name" type="text" placeholder="Your Name *"
+                                    required>
+                                <small class="text-danger error-msg d-none"></small>
+                            </div>
+                            <div class="am-field-group">
+                                <input name="email" class="form-control" type="email" id="email"
+                                    placeholder="Email Address *" required>
+                                <small class="text-danger error-msg d-none"></small>
+                            </div>
                         </div>
 
                         <div class="am-form-row">
-                            <input type="tel" placeholder="Phone Number">
-                            <input type="text" placeholder="Company Name">
+                            <div class="am-field-group">
+                                <input name="phone" class="form-control" id="phone" type="tel"
+                                    placeholder="Phone Number">
+                                <small class="text-danger error-msg d-none"></small>
+                            </div>
+                            <div class="am-field-group">
+                                <input name="company" class="form-control" id="company" type="text"
+                                    placeholder="Company Name">
+                                <small class="text-danger error-msg d-none"></small>
+                            </div>
                         </div>
 
-                        <select required>
-                            <option value="">Service Required *</option>
-                            <option>Coal Transportation</option>
-                            <option>Rail Logistics</option>
-                            <option>Road-cum-Rail (RCR) Logistics</option>
-                            <option>Coal Crushing</option>
-                            <option>Coal Rake Loading</option>
-                            <option>Bulk Mineral Logistics</option>
-                        </select>
+                        <div class="am-field-group">
+                            <select required id="service" name="service">
+                                <option value="">Service Required *</option>
+                                <option value="Coal Transportation">Coal Transportation</option>
+                                <option value="Rail Logistics">Rail Logistics</option>
+                                <option value="Road-cum-Rail (RCR) Logistics">Road-cum-Rail (RCR) Logistics</option>
+                                <option value="Coal Crushing">Coal Crushing</option>
+                                <option value="Coal Rake Loading">Coal Rake Loading</option>
+                                <option value="Bulk Mineral Logistics">Bulk Mineral Logistics</option>
+                            </select>
+                            <small class="text-danger error-msg d-none" id="service-error"></small>
+                        </div>
 
-                        <textarea placeholder="Your Message *" required></textarea>
+                        <div class="am-field-group">
+                            <textarea placeholder="Your Message *" name="message" id="message"></textarea>
+                        </div>
 
-                        <button type="submit">Send Message</button>
+                        <button type="submit" class="btn btn-success" id="submitcontact">Submit</button>
+                        <div class="text-center"><small id="formSuccess" class="text-success d-none"></small></div>
 
                     </form>
 
@@ -336,6 +359,120 @@
 
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
+
+    <script>
+        const scriptURL =
+            "https://script.google.com/macros/s/AKfycbyUmIYasWUIgcofEaDC9qlOer6zEEjcZth89TPabqSaMyVMuZQ6X1S0ppM-bb_JtTuu/exec";
+
+        const PhoneValidation = /^(?:\+91[\-\s]?|0)?[6-9]\d{9}$/;
+        const EmailValidation = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        function showFieldError(inputId, message) {
+            let input = document.getElementById(inputId);
+            let error = input.parentElement.querySelector(".error-msg");
+
+            error.innerText = message;
+            error.classList.remove("d-none");
+            return false;
+        }
+
+        function clearFieldError(input) {
+            let error = input.parentElement.querySelector(".error-msg");
+            if (error) error.classList.add("d-none");
+        }
+
+        function validateField(id) {
+            let value = document.getElementById(id).value.trim();
+
+            if (!value) return showFieldError(id, "This field is required.");
+
+            if (id === "email" && !EmailValidation.test(value))
+                return showFieldError(id, "Please enter a valid email address.");
+
+            if (id === "phone" && !PhoneValidation.test(value))
+                return showFieldError(id, "Please enter a valid phone number.");
+
+            return true;
+        }
+
+        const order = ["name", "email", "phone", "company"];
+
+        document.querySelectorAll(".form-control").forEach((input) => {
+            input.addEventListener("focus", function () {
+                let current = this.id;
+                let index = order.indexOf(current);
+
+                for (let i = 1; i <= index; i++) {
+                    if (!validateField(order[i])) return;
+                }
+            });
+
+            input.addEventListener("input", function () {
+                clearFieldError(this);
+            });
+        });
+
+
+        document
+            .getElementById("submitcontact")
+            .addEventListener("click", function (event) {
+                event.preventDefault();
+
+                for (let field of order) {
+                    if (!validateField(field)) return false;
+                }
+
+                let sendMail = true;
+                let Name = document.getElementById("name").value.trim();
+                let email = document.getElementById("email").value.trim();
+                let phone = document.getElementById("phone").value.trim();
+                let service = document.getElementById("service").value.trim();
+                let company = document.getElementById("company").value.trim();
+                let message = document.getElementById("message").value.trim();
+
+                if (!service) {
+                    return showFieldError("service", "Please select a service.");
+                }
+
+                let success = document.getElementById("formSuccess");
+                success.classList.remove("d-none");
+                success.innerText = "Please wait we are authenticating!";
+
+
+                const fullURL = `${scriptURL}?name=${encodeURIComponent(Name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&service=${encodeURIComponent(service)}&company=${encodeURIComponent(company)}&message=${encodeURIComponent(message)}&sendmail=${sendMail}`;
+
+                fetch(fullURL)
+                    .then((response) => response.text())
+                    .then(() => {
+                        let success = document.getElementById("formSuccess");
+                        success.classList.remove("d-none");
+                        success.innerText = "Form Submitted Successfully!";
+
+                        setTimeout(() => {
+                            success.classList.add("d-none");
+                            success.innerText = "";
+                        }, 3000);
+                        document.getElementById("name").value = "";
+                        document.getElementById("email").value = "";
+                        document.getElementById("phone").value = "";
+                        document.getElementById("service").value = "";
+                        document.getElementById("company").value = "";
+                        document.getElementById("message").value = "";
+
+                        document.querySelectorAll(".error-msg")
+                            .forEach((e) => e.classList.add("d-none"));
+
+                        document.querySelectorAll(".form-control")
+                            .forEach((e) => e.classList.remove("is-invalid"));
+
+                        window.location.reload();
+                    })
+                    .catch((error) => {
+                        console.log("Error submitting form:", error);
+                    });
+                { once: true }
+            });
+    </script>
 </body>
 
 </html>
