@@ -3643,6 +3643,8 @@ img {
 .footer-social {
     display: flex;
     gap: 12px;
+    margin-left: auto;
+    margin-right:80px;
 }
 
 .footer-social a {
