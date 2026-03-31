@@ -2954,6 +2954,7 @@ img {
 }
 
 .am-contact-form button:hover {
+    color: rgb(18, 1, 1);
     transform: translateY(-2px);
     box-shadow:
         0 8px 25px rgba(243, 112, 33, 0.4),
