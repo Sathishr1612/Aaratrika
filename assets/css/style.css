@@ -3664,6 +3664,13 @@ img {
     transform: translateY(-3px);
 }
 
+@media (max-width: 767px) {
+    .footer-social {
+        margin-right: 0;
+        width: 100%;
+    }
+}
+
 /* ============================================
    ANIMATIONS
    ============================================ */
