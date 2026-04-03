@@ -740,7 +740,32 @@ document.addEventListener('visibilitychange', () => {
 
 
 
+(function () {
+  const track = document.getElementById('tmTrack');
+  const cards = track.innerHTML;
 
-/**
- * Contact Form Handler
- */
+  track.innerHTML = cards + cards + cards;
+
+  let position = 0;
+  const speed = 1.2; // 🔥 FAST
+  let isPaused = false;
+
+  track.addEventListener('mouseenter', () => (isPaused = true));
+  track.addEventListener('mouseleave', () => (isPaused = false));
+
+  function animate() {
+    if (!isPaused) {
+      position -= speed;
+
+      const setWidth = track.scrollWidth / 3;
+
+      position = position % setWidth;
+
+      track.style.transform = `translateX(${position}px)`;
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+})();
