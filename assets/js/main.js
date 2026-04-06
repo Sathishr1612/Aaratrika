@@ -747,7 +747,7 @@ document.addEventListener('visibilitychange', () => {
   track.innerHTML = cards + cards + cards;
 
   let position = 0;
-  const speed = 1.2; // 🔥 FAST
+  const speed = 1.2; 
   let isPaused = false;
 
   track.addEventListener('mouseenter', () => (isPaused = true));
